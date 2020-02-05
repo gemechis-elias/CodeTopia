@@ -41,7 +41,7 @@ function copy_to_clipboard(input_id:string){
 }
 
 function disable_btn(btn_id:string) {
-    document.getElementById(btn_id).disabled = true;
+    console.log("hello")
 }
 
 export { copy_to_clipboard, caps_lock_on, show_password, disable_btn }
