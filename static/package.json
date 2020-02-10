@@ -5,7 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --mode development",
-    "compile": "webpack --watch"
+    "compile": "webpack --watch",
+    "sass": "sass"
   },
   "author": "Endalkachew Biruk",
   "license": "ISC",
