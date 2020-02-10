@@ -28,6 +28,9 @@ SECRET.key
 # C extensions
 *.so
 
+# Node specific
+node_modules
+
 # Distribution / packaging Spcific Ignore FIles
 .Python
 build/
