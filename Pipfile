@@ -11,6 +11,7 @@ flake8 = "*"
 tox = "*"
 coverage = "*"
 pillow = "*"
+markdown2 = "*"
 
 [requires]
 python_version = "3.7"
