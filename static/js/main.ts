@@ -1,4 +1,4 @@
-import "./lib/handlebar.js"
+
 
 function show_password(form_id:string) {
     // function for revealing password data from password field
@@ -44,4 +44,11 @@ function disable_btn(btn_id:string) {
     console.log("hello")
 }
 
-export { copy_to_clipboard, caps_lock_on, show_password, disable_btn }
+function nav_toggler() {
+    var x = document.getElementById("navbar");
+    if (x.className === "navbar") {
+        x.className += " responsive";
+    } else {
+        x.className = "navbar";
+    }
+}
