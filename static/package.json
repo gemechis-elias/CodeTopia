@@ -1,28 +1,18 @@
 {
-  "name": "static",
+  "name": "endalkachew",
   "version": "1.0.0",
-  "description": "Front End Libs For CodeTopia Web Project",
+  "description": "CodeTopia Project javascript bundle",
+  "main": "webpack.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --mode development",
-    "compile": "webpack --watch",
-    "sass": "sass"
+    "watch": "webpack --watch",
+    "build": "webpack"
   },
-  "author": "Endalkachew Biruk",
-  "license": "ISC",
+  "author": "Endalkachew",
+  "license": "Apache-2.0",
   "devDependencies": {
-    "autoprefixer": "^9.7.4",
-    "css-loader": "^3.4.2",
-    "node-sass": "^4.13.1",
-    "postcss-loader": "^3.0.0",
-    "sass-loader": "^8.0.2",
-    "source-map-loader": "^0.2.4",
-    "style-loader": "^1.1.3",
+    "sass": "^1.25.0",
     "ts-loader": "^6.2.1",
-    "typescript": "^3.7.5",
-    "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.10.3"
-  },
-  "dependencies": {}
+    "typescript": "^3.7.5"
+  }
 }

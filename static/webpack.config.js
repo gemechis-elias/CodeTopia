@@ -1,24 +1,25 @@
 const path = require('path');
 
 module.exports = {
-    mode: "development",
-    watch: true,
-    entry: [ path.join(__dirname, '/js/main.ts'), path.join(__dirname, '/scss/main.scss') ],
-    output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist')
-    },
-    devtool: "source-map",
-    module: {
-        rules: [
-            { test: /\.scss$/, use: [ "style-loader", "css-loader", "sass-loader" ] },
-            { test: /\.tsx?$/, loader: "ts-loader" },
-            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
-        ]
-    },
-    resolve: {
-        extensions: [".tsx", ".ts", ".js", "json"]
-    },
+  mode: 'development',
+  entry: './js/main.ts',
+  devtool: 'inline-source-map',
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: [ '.tsx', '.ts', '.js' ],
+  },
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
 };
 
 // npm install --save-dev webpack
