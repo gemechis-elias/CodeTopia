@@ -38,7 +38,11 @@ select {
     }
 }
 
+.errorlist {
+    color: $input-error-color;
+}
+
 .helptext{
-    font-size: 5px;
+    font-size: 12px;
     color: gray;
 }

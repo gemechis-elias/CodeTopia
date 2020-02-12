@@ -45,4 +45,21 @@ function nav_toggler() {
         x.className = "navbar";
     }
 }
-//# sourceMappingURL=main.js.map
+function navSlide() {
+    var toggler = document.querySelector(".toggler");
+    var nav = document.querySelector(".nav-links");
+    var navLinks = document.querySelectorAll(".nav-links li");
+    toggler.addEventListener("click", function () {
+        nav.classList.toggle("nav-active");
+        navLinks.forEach(function (link, index) {
+            if (link.style.animation) {
+                link.style.animation = "";
+            }
+            else {
+                link.style.animation = "navLinkFade 0.5s ease forwards " + index / 5 + "s";
+            }
+        });
+        toggler.classList.toggle("toggle");
+    });
+}
+navSlide();
