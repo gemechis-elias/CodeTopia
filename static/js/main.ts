@@ -52,3 +52,25 @@ function nav_toggler() {
         x.className = "navbar";
     }
 }
+
+function navSlide() {
+    const toggler:any = document.querySelector(".toggler")
+    const nav:any = document.querySelector(".nav-links")
+    const navLinks:any = document.querySelectorAll(".nav-links li")
+
+    toggler.addEventListener("click", () => {
+        nav.classList.toggle("nav-active")
+
+        navLinks.forEach((link:any, index:number) => {
+            if (link.style.animation) {
+                link.style.animation = ""
+            } else {
+                link.style.animation = `navLinkFade 0.5s ease forwards ${index / 5 }s`
+            }
+        })
+
+        toggler.classList.toggle("toggle")
+    })
+}
+
+navSlide()
