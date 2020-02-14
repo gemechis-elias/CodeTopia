@@ -31,3 +31,9 @@ local_test:
 travis_test:
 	flake8
 	python manage.py test
+
+dump_data:
+	python manage.py dumpdata --all --force-color --indent 4 --output dumped_data.json
+
+load_data:
+	python manage.py loaddata dumped_data.json --format=json

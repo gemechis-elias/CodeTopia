@@ -6,6 +6,7 @@
     <ul class="nav-links">
         <li><a href="{% url 'homepage' %}">Home</a></li>
         <li><a href="{% url 'elements' %}">Elements</a></li>
+        <li><a href="{% url 'blog:blog_homepage' %}">Blog</a></li>
         {% if request.user.is_authenticated %}
             <li><a href="{% url 'account:user_dashboard' request.user.username %}">Dashboard</a></li>
             <li><a href="{% url 'account:user_logout' %}">Logout</a></li>
