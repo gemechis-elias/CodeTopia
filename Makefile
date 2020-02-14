@@ -8,3 +8,14 @@ compile_sass:
 
 compile_ts:
 	tsc --outFile ./static/js/main.js ./static/js/main.ts
+
+local_test:
+	coverage erase
+	flake8
+	coverage run manage.py test
+	coverage report
+	coverage html
+
+travis_test:
+	flake8
+	python manage.py test
