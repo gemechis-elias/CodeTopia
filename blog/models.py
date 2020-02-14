@@ -27,6 +27,9 @@ class Blog(models.Model):
         on_delete=models.CASCADE
     )
 
+    title = models.CharField(_("Title"), max_length=60)
+    subject = models.CharField(_("Subject"), max_length=100)
+    body = models.CharField(_("Body"), max_length=1500)
     published = models.BooleanField(_("Published"), default=False)
 
     objects = models.Manager()

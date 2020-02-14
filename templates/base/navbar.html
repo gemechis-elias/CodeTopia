@@ -1,4 +1,4 @@
-{% comment '' %}
+
 <ul>
     {% if request.user.is_authenticated %}
         <li><a href="{% url 'account:user_dashboard' request.user.username %}">Dashboard</a></li>
@@ -8,6 +8,7 @@
         <li><a href="{% url 'account:create_user' %}">Sign up</a></li>
     {% endif %}
     <li><a href="{% url 'elements' %}">Elements</a></li>
+    <li><a href="{% url 'blog:blog_homepage' %}">Blog</a></li>
 </ul>
 {% if messages %}
 	<ul class="messages">
@@ -16,13 +17,3 @@
 		{% endfor %}
 	</ul>
 {% endif %}
-{% endcomment %}
-
-<nav class="navbar container-fluid" id="navbar">
-    <a href="#news">News</a>
-    <a href="#contact">Contact</a>
-    <a href="#about">About</a>
-    <a href="javascript:void(0);" class="icon" onclick="nav_toggler()">
-        <i class="fa fa-bars"></i>
-    </a>
-</nav>
