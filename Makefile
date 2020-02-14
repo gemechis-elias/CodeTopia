@@ -3,6 +3,15 @@
 server:
 	python manage.py runserver
 
+makemigrations:
+	python manage.py makemigrations
+
+migrate:
+	python manage.py migrate
+
+migrate_all: makemigrations
+	python manage.py migrate
+
 compile_sass:
 	sass ./static/scss/main.scss ./static/scss/main.css --style=compressed --watch
 
