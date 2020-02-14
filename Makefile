@@ -37,3 +37,6 @@ dump_data:
 
 load_data:
 	python manage.py loaddata dumped_data.json --format=json
+
+createsuperuser:
+	python manage.py createsuperuser --username root --email example@gmail.com

@@ -23,14 +23,14 @@ class Blog(models.Model):
 
     author = models.OneToOneField(
         to=settings.AUTH_USER_MODEL, 
-        verbose_name=_("related_user"), 
+        verbose_name=_("Author"), 
         on_delete=models.CASCADE
     )
 
-    title = models.CharField(_("Title"), max_length=60)
-    subject = models.CharField(_("Subject"), max_length=100)
-    body = models.CharField(_("Body"), max_length=1500)
-    published = models.BooleanField(_("Published"), default=False)
+    title = models.CharField(verbose_name=_("Title"), max_length=60)
+    subject = models.CharField(verbose_name=_("Subject"), max_length=100)
+    body = models.CharField(verbose_name=_("Body"), max_length=1500)
+    published = models.BooleanField(verbose_name=_("Published"), default=False)
 
     objects = models.Manager()
     blogs = BlogManager()
