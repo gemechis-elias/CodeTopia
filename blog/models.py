@@ -1,6 +1,7 @@
 from django.db import models
 
 from django.conf import settings
+from django.contrib.auth.models import User
 
 from django.utils.translation import gettext_lazy as _
 
@@ -13,17 +14,11 @@ class BlogManager(models.Manager):
     def get_queryset(self):
         return super(BlogManager, self).get_queryset().filter(published=True)
 
-def get_profile_pic_path(instance, filename):
-    """Method that returns upload location for the current user's profile picture"""
-    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
-    file_path = os.path.join("users_profile_pic", instance.user.username, filename)
-    return file_path
-
 class Blog(models.Model):
 
-    author = models.OneToOneField(
-        to=settings.AUTH_USER_MODEL, 
-        verbose_name=_("Author"), 
+    author = models.ForeignKey(
+        to=User, 
+        verbose_name=_("Author"),
         on_delete=models.CASCADE
     )
 

@@ -27,7 +27,7 @@ class BlogCreatioForm(forms.ModelForm):
 
     class Meta:
         model = Blog
-        exclude = ["author", "published"]
+        exclude = ["published"]
         labels = {
             'author': Blog._meta.get_field("author").verbose_name
         }
@@ -53,6 +53,3 @@ class BlogCreatioForm(forms.ModelForm):
                 'cols': 80, 'rows': 20, 'class': 'form-control'
             })
         }
-
-    def _post_clean(self):
-        super()._post_clean()

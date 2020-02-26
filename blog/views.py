@@ -110,7 +110,9 @@ class CreateBlog(View):
 
     def get(self, request, *args, **kwargs):
         self.extra_context = {
-            "form": self.get_form_class()
+            "form": self.get_form_class(initial = {
+                'author': request.user
+            })
         }
         return render(request=self.request, template_name=self.template_name, context=self.get_context_data())
 
