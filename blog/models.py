@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 
 from django.utils.translation import gettext_lazy as _
 
+from django.urls import reverse
+
 import os
 
 __all__ = [ "Blog" ]
@@ -31,4 +33,13 @@ class Blog(models.Model):
     blogs = BlogManager()
 
     def __str__(self):
-        return "%s"% self.author.username
+        return "%s"% self.title
+
+    def get_absolute_url(self):
+        return reverse(viewname="blog:blog_detail", args=[self.id])
+
+    def get_edit_url(self):
+        return reverse(viewname="blog:update_blog", args=[self.id])
+
+    def get_delete_url(self):
+        return reverse(viewname="blog:delete", args=[self.id])

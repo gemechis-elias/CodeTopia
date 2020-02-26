@@ -40,6 +40,8 @@ from django.contrib import messages
 # Project modules
 from .forms import BlogCreatioForm
 
+from .models import Blog
+
 # Third party modules
 import markdown2
 
@@ -47,11 +49,12 @@ import markdown2
 
 
 __all__ = [
-    "Blog",
-    "CreateBlog"
+    "BlogIndexView",
+    "CreateBlog",
+    "UpdateBlog"
 ]
 
-class Blog(View):
+class BlogIndexView(View):
     """Class for creating user with no priviledges"""
 
     template_name = "blog/index.html"
@@ -72,13 +75,13 @@ class Blog(View):
 
     def get(self, request, *args, **kwargs):
         self.extra_context = {
-
+            "blogs": Blog.blogs.all()
         }
         return render(request=self.request, template_name=self.template_name, context=self.get_context_data())
 
 
 class CreateBlog(View):
-    """Class for creating user with no priviledges"""
+    """class creating a blog from given fields"""
     template_name = "blog/create_blog.html"
     form_class = BlogCreatioForm
 
@@ -136,3 +139,68 @@ class CreateBlog(View):
             "form": form
         }
         return render(request=self.request, template_name=self.template_name, context=self.get_context_data())
+
+
+class UpdateBlog(View):
+    """Class for updating user with no priviledges"""
+    template_name = "blog/update_blog.html"
+    form_class = BlogCreatioForm
+
+    title = _('CodeTopia | Update Blog')
+    extra_context = None
+
+    # Error messages for the view
+    error_messages = {
+    }
+    # Success messages for the view
+    success_messages = {
+        "updated_succesfully": _("Congradulation you have updated  your blog succesfully.")
+    }
+
+    def get_form_class(self, *args, **kwargs):
+        """Return the instance of the for class to be used."""
+        return self.form_class(*args, **kwargs)
+
+    def get_context_data(self, *args, **kwargs):
+        """Return all context data by collecting it."""
+        current_site = get_current_site(self.request)
+        context = {
+            "site": current_site,
+            "site_name": current_site.name,
+            "title": self.title
+        }
+        context.update(**(self.extra_context or {}))
+        return context
+
+    def get_blog_instance(self, *args, **kwargs):
+        return Blog.objects.get(id = int(self.kwargs["id"]))
+
+    def get(self, request, *args, **kwargs):
+
+        self.extra_context = {
+            "form": self.get_form_class(instance = self.get_blog_instance())
+        }
+        return render(request=self.request, template_name=self.template_name, context=self.get_context_data())
+
+    @method_decorator(sensitive_post_parameters())
+    @method_decorator(csrf_protect)
+    def post(self, *args, **kwargs):
+        form = self.get_form_class(self.request.POST, instance = self.get_blog_instance())
+        if form.is_valid():
+            blog = form.save(commit=False)
+            blog.author = self.request.user
+            blog.save()
+            messages.success(
+                request=self.request, 
+                message=self.success_messages.get("updated_succesfully")
+            )
+
+            return HttpResponseRedirect(reverse(viewname="blog:blog_homepage"))
+
+        # If the form is invalid return the form with error messages
+        self.extra_context = {
+            **self.get_context_data(),
+            "form": form
+        }
+        return render(request=self.request, template_name=self.template_name, context=self.get_context_data())
+
