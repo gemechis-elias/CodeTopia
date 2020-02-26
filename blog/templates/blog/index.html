@@ -17,7 +17,7 @@
 <h1>Recent Blogs</h1>
 <ul>
     {% for blog in blogs  %}
-        <li>{{ blog.title }}</li>
+        <li><a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a></li>
     {% endfor %}
 </ul>
 
