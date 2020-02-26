@@ -51,6 +51,7 @@ import markdown2
 __all__ = [
     "BlogIndexView",
     "CreateBlog",
+    "BlogDetail",
     "UpdateBlog"
 ]
 
@@ -141,6 +142,35 @@ class CreateBlog(View):
         return render(request=self.request, template_name=self.template_name, context=self.get_context_data())
 
 
+class BlogDetail(View):
+    """Class for updating user with no priviledges"""
+    template_name = "blog/blog_detail.html"
+
+    title = _('CodeTopia | Blog Detail')
+    extra_context = None
+
+    def get_context_data(self, *args, **kwargs):
+        """Return all context data by collecting it."""
+        current_site = get_current_site(self.request)
+        context = {
+            "site": current_site,
+            "site_name": current_site.name,
+            "title": self.title
+        }
+        context.update(**(self.extra_context or {}))
+        return context
+
+    def get_blog_instance(self, *args, **kwargs):
+        return Blog.objects.get(id = int(self.kwargs["id"]))
+
+    def get(self, request, *args, **kwargs):
+
+        self.extra_context = {
+            "blog": self.get_blog_instance()
+        }
+        return render(request=self.request, template_name=self.template_name, context=self.get_context_data())
+
+
 class UpdateBlog(View):
     """Class for updating user with no priviledges"""
     template_name = "blog/update_blog.html"
@@ -175,6 +205,7 @@ class UpdateBlog(View):
     def get_blog_instance(self, *args, **kwargs):
         return Blog.objects.get(id = int(self.kwargs["id"]))
 
+    @method_decorator(login_required)
     def get(self, request, *args, **kwargs):
 
         self.extra_context = {
@@ -184,6 +215,7 @@ class UpdateBlog(View):
 
     @method_decorator(sensitive_post_parameters())
     @method_decorator(csrf_protect)
+    @method_decorator(login_required)
     def post(self, *args, **kwargs):
         form = self.get_form_class(self.request.POST, instance = self.get_blog_instance())
         if form.is_valid():
