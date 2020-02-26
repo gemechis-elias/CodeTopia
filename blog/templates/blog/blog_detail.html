@@ -14,7 +14,11 @@
 
 <div>
     <small><a href="{{ blog.get_edit_url }}">edit</a></small>
-    <h3>{{ blog.title }}</h3>
+    {% autoescape off %}
+        <h3>{{ blog.title|safe }}</h3>
+        <h5>{{ blog.subject|safe }}</h5>
+        <p>{{ blog.body|safe }}</p>
+    {% endautoescape %}
 </div>
 
 </div>

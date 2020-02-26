@@ -45,8 +45,6 @@ from .models import Blog
 # Third party modules
 import markdown2
 
-# markdown2.markdown("*boo!*", extras=["footnotes"])
-
 
 __all__ = [
     "BlogIndexView",
@@ -126,6 +124,9 @@ class CreateBlog(View):
         if form.is_valid():
             blog = form.save(commit=False)
             blog.author = self.request.user
+            blog.title = markdown2.markdown(text = form.cleaned_data.get("title"))
+            blog.subject = markdown2.markdown(text = form.cleaned_data.get("subject"))
+            blog.body = markdown2.markdown(text = form.cleaned_data.get("body"))
             blog.save()
             messages.success(
                 request=self.request, 
@@ -224,6 +225,9 @@ class UpdateBlog(View, UserPassesTestMixin):
         if form.is_valid():
             blog = form.save(commit=False)
             blog.author = self.request.user
+            blog.title = markdown2.markdown(text = form.cleaned_data.get("title"))
+            blog.subject = markdown2.markdown(text = form.cleaned_data.get("subject"))
+            blog.body = markdown2.markdown(text = form.cleaned_data.get("body"))
             blog.save()
             messages.success(
                 request=self.request, 
