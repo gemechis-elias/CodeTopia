@@ -171,7 +171,7 @@ class BlogDetail(View):
         return render(request=self.request, template_name=self.template_name, context=self.get_context_data())
 
 
-class UpdateBlog(View):
+class UpdateBlog(View, UserPassesTestMixin):
     """Class for updating user with no priviledges"""
     template_name = "blog/update_blog.html"
     form_class = BlogCreatioForm
@@ -204,6 +204,9 @@ class UpdateBlog(View):
 
     def get_blog_instance(self, *args, **kwargs):
         return Blog.objects.get(id = int(self.kwargs["id"]))
+
+    def test_func(self):
+        return self.request.user == self.get_blog_instance().author
 
     @method_decorator(login_required)
     def get(self, request, *args, **kwargs):
