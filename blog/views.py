@@ -90,7 +90,7 @@ class CreateBlog(View):
     }
     # Success messages for the view
     success_messages = {
-        "create_succesfully": _("Congradulation you have created  your blog succesfully.")
+        "created_succesfully": _("Congradulation you have created  your blog succesfully.")
     }
 
     def get_form_class(self, *args, **kwargs):
@@ -110,9 +110,7 @@ class CreateBlog(View):
 
     def get(self, request, *args, **kwargs):
         self.extra_context = {
-            "form": self.get_form_class(initial = {
-                'author': request.user
-            })
+            "form": self.get_form_class()
         }
         return render(request=self.request, template_name=self.template_name, context=self.get_context_data())
 
@@ -122,10 +120,12 @@ class CreateBlog(View):
     def post(self, *args, **kwargs):
         form = self.get_form_class(self.request.POST)
         if form.is_valid():
-            form.save()
+            blog = form.save(commit=False)
+            blog.author = self.request.user
+            blog.save()
             messages.success(
                 request=self.request, 
-                message=self.success_messages.get("create_succesfully")
+                message=self.success_messages.get("created_succesfully")
             )
 
             return HttpResponseRedirect(reverse(viewname="blog:blog_homepage"))

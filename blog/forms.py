@@ -27,7 +27,7 @@ class BlogCreatioForm(forms.ModelForm):
 
     class Meta:
         model = Blog
-        exclude = ["published"]
+        exclude = ["author", "published"]
         labels = {
             'author': Blog._meta.get_field("author").verbose_name
         }
