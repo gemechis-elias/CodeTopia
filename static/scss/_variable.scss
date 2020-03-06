@@ -55,3 +55,13 @@ $transition-basic:            all .2s ease-in-out !default;
 $transition-hoverable:        all .55s ease-in-out !default;
 
 // Navbar
+
+// Form
+
+// Form + Btn
+$input-btn-padding-y:           .375rem !default;
+$input-btn-padding-x:           .75rem !default;
+
+// Form + Input
+$input-padding-y:       $input-btn-padding-y !default;
+$input-padding-x:       $input-btn-padding-x !default;
