@@ -6,14 +6,16 @@
 
 {% block content %}
 
-<h1>Create account</h1>
-<hr>
-<form action="{% url 'account:create_user' %}" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <small>Already have an account <a href="{% url 'account:user_login' %}">Login here.</a></small> <br>
-    <button class="btn btn-primary" type="submit">Sign Up</button>
-</form>
+<div class="container">
+    <h1>Create account</h1>
+    <hr>
+    <form action="{% url 'account:create_user' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <small>Already have an account <a href="{% url 'account:user_login' %}">Login here.</a></small> <br>
+        <button class="btn btn-primary" type="submit">Sign Up</button>
+    </form>
+</div>
 
 {% endblock content %}
 
