@@ -28,6 +28,13 @@ SECRET.key
 # C extensions
 *.so
 
+# dumped data
+dumped_data.json
+
+# node
+node_modules
+dist
+
 # Distribution / packaging Spcific Ignore FIles
 .Python
 build/

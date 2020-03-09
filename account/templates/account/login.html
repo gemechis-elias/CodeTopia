@@ -6,14 +6,20 @@
 
 {% block content %}
 
-<h1>Login</h1>
-<hr>
-<form action="{% url 'account:user_login' %}" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <small>Forgo password? <a href="{% url 'account:user_password_reset' %}">reset here</a></small> <br>
-    <button class="btn btn-primary" type="submit">Login</button>
-</form>
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h1>Login</h1>
+            <hr>
+            <form action="{% url 'account:user_login' %}" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <small>Forgot password? <a href="{% url 'account:user_password_reset' %}">reset here</a></small> <br>
+                <button class="btn btn-primary" type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+</div>
 
 {% endblock content %}
 
