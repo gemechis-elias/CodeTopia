@@ -1,10 +1,23 @@
 # Follow the following steps to set up your enviourement and start to contribute.
 
+## For Linux Users
+
 ### 1, Make sure you have all nessecary softwares installed.
 
 Install the following softwares and dependecies before starting.
 
-* python 3.7 [install](https://www.python.org/)
+* install python 3:
+```bash
+sudo apt install python3
+```
+after installing python3 make it your default python interpreter
+```bash
+echo "alias python=python3" >> ~/.bash_aliases
+```
+apply the changes
+```bash
+source ~/.bash_aliases
+```
 * git
 
 ## 2, Install necessary dependecies.
@@ -12,7 +25,7 @@ Install the following softwares and dependecies before starting.
 * upgrade your python package manager pip
 
     ```bash
-    python -m pip install --upgrade pip
+    sudo apt install python3-pip
     ```
 
 * install pipenv for package control.
