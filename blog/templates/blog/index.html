@@ -1,0 +1,28 @@
+{% extends 'base/base.html' %}
+
+{% block header %}
+
+{% endblock header %}
+
+{% block content %}
+
+<div class="container">
+    <h1>Wellcome to Blog</h1>
+</div>
+
+<ul>
+    <li><a href="{% url 'blog:create_blog' %}">create blog</a></li>
+</ul>
+
+<h1>Recent Blogs</h1>
+<ul>
+    {% for blog in blogs  %}
+        <li><a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a></li>
+    {% endfor %}
+</ul>
+
+{% endblock content %}
+
+{% block scripts %}
+
+{% endblock scripts %}

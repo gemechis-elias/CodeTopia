@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     # Project app
     'account.apps.AccountConfig',
     'core.apps.CoreConfig',
+    'blog.apps.BlogConfig',
 
     # Third party apps
 
