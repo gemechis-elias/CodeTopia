@@ -116,7 +116,6 @@ class CreateBlog(View):
         }
         return render(request=self.request, template_name=self.template_name, context=self.get_context_data())
 
-
     @method_decorator(sensitive_post_parameters())
     @method_decorator(csrf_protect)
     def post(self, *args, **kwargs):
@@ -124,9 +123,9 @@ class CreateBlog(View):
         if form.is_valid():
             blog = form.save(commit=False)
             blog.author = self.request.user
-            blog.title = markdown2.markdown(text = form.cleaned_data.get("title"))
-            blog.subject = markdown2.markdown(text = form.cleaned_data.get("subject"))
-            blog.body = markdown2.markdown(text = form.cleaned_data.get("body"))
+            blog.title = markdown2.markdown(text=form.cleaned_data.get("title"))
+            blog.subject = markdown2.markdown(text=form.cleaned_data.get("subject"))
+            blog.body = markdown2.markdown(text=form.cleaned_data.get("body"))
             blog.save()
             messages.success(
                 request=self.request, 
@@ -162,7 +161,7 @@ class BlogDetail(View):
         return context
 
     def get_blog_instance(self, *args, **kwargs):
-        return Blog.objects.get(id = int(self.kwargs["id"]))
+        return Blog.objects.get(id=int(self.kwargs["id"]))
 
     def get(self, request, *args, **kwargs):
 
@@ -204,7 +203,7 @@ class UpdateBlog(View, UserPassesTestMixin):
         return context
 
     def get_blog_instance(self, *args, **kwargs):
-        return Blog.objects.get(id = int(self.kwargs["id"]))
+        return Blog.objects.get(id=int(self.kwargs["id"]))
 
     def test_func(self):
         return self.request.user == self.get_blog_instance().author
@@ -213,7 +212,7 @@ class UpdateBlog(View, UserPassesTestMixin):
     def get(self, request, *args, **kwargs):
 
         self.extra_context = {
-            "form": self.get_form_class(instance = self.get_blog_instance())
+            "form": self.get_form_class(instance=self.get_blog_instance())
         }
         return render(request=self.request, template_name=self.template_name, context=self.get_context_data())
 
@@ -221,13 +220,13 @@ class UpdateBlog(View, UserPassesTestMixin):
     @method_decorator(csrf_protect)
     @method_decorator(login_required)
     def post(self, *args, **kwargs):
-        form = self.get_form_class(self.request.POST, instance = self.get_blog_instance())
+        form = self.get_form_class(self.request.POST, instance=self.get_blog_instance())
         if form.is_valid():
             blog = form.save(commit=False)
             blog.author = self.request.user
-            blog.title = markdown2.markdown(text = form.cleaned_data.get("title"))
-            blog.subject = markdown2.markdown(text = form.cleaned_data.get("subject"))
-            blog.body = markdown2.markdown(text = form.cleaned_data.get("body"))
+            blog.title = markdown2.markdown(text=form.cleaned_data.get("title"))
+            blog.subject = markdown2.markdown(text=form.cleaned_data.get("subject"))
+            blog.body = markdown2.markdown(text=form.cleaned_data.get("body"))
             blog.save()
             messages.success(
                 request=self.request, 
@@ -242,4 +241,3 @@ class UpdateBlog(View, UserPassesTestMixin):
             "form": form
         }
         return render(request=self.request, template_name=self.template_name, context=self.get_context_data())
-
